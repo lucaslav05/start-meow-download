@@ -27,9 +27,23 @@ app.get('/', (req, res) => {
         <h1>Welcome to Express on Vercel 🚀</h1>
         <p>This is a minimal example without a database or forms.</p>
         <img src="/logo.png" alt="Logo" width="120" />
+        <br/>
+        <a href="/download/StartMeow">
+          <button>Download StartMeow</button>
+        </a>
       </body>
     </html>
   `)
+})
+
+// Download route for StartMeow executable
+app.get('/download/StartMeow', (req, res) => {
+  const filePath = path.join(__dirname, '..', '..', 'StartMeow')
+  res.download(filePath, 'StartMeow', (err) => {
+    if (err) {
+      res.status(404).send('File not found')
+    }
+  })
 })
 
 app.get('/about', function (req, res) {
